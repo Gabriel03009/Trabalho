@@ -2,6 +2,10 @@ const express = require("express");
 const app = express();
 const port = 3000;
 const router = require("./routes/index");
+const conexao = require("./structure/conexao");
+const tabela = require("./structure/tabela");
+
+tabela.init(conexao);
 
 router(app);   
 
