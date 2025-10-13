@@ -1,8 +1,13 @@
 const usuarioModel = require("../model/usuarioModel");
-class usuarioCrontoller {
+class usuarioController {
+    
     Listar(){
         return usuarioModel.Listar();
     }
+
+    Cadastrar(novoCadastro){
+        return usuarioModel.Cadastrar(novoCadastro);
+    }
 }
 
-module.exports = new usuarioCrontoller();
+module.exports = new usuarioController();

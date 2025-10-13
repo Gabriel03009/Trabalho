@@ -5,9 +5,9 @@ const router = require("./routes/index");
 const conexao = require("./structure/conexao");
 const tabela = require("./structure/tabela");
 
+router(app, express);   
 tabela.init(conexao);
 
-router(app);   
 
 app.listen(port, (error) => {
     if (error) {

@@ -13,5 +13,20 @@ class usuarioModel {
             });
         });
     }
+
+    Cadastrar(novoCadastro){
+        const sql = "INSERT INTO usuario SET ?";
+        console.log(novoCadastro);
+        return new Promise((resolve, reject) => {
+            conexao.query(sql, novoCadastro, (error, resposta) => {
+            if (error) {
+                console.log("Erro ao cadastrar usuario");
+                reject(error);
+            }
+            console.log("Usuario cadastrado com sucesso");
+            resolve(resposta);
+            });
+        });
+    }
 }
 module.exports = new usuarioModel();
