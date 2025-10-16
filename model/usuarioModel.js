@@ -16,7 +16,6 @@ class usuarioModel {
 
     Cadastrar(novoCadastro){
         const sql = "INSERT INTO usuario SET ?";
-        console.log(novoCadastro);
         return new Promise((resolve, reject) => {
             conexao.query(sql, novoCadastro, (error, resposta) => {
             if (error) {

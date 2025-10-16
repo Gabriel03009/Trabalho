@@ -99,7 +99,7 @@
       <p><input type="password" id="senha" maxlength="30" placeholder="Digite sua senha" >
       <span class="eye-icon" onclick="toggleSenha()">👁️</span></p>
       <a href="explorar.html" class="btn neon-btn">Login</a>
-      <a href="explorar.html" class="btn neon-btn">Cadastrar</a>
+      <a href="#" class="btn neon-btn" onclick="cadastrar()">Cadastrar</a>
     </div>
   </section>
 
@@ -119,6 +119,29 @@
         icon.textContent = "👁️"; // ícone de "olho aberto"
       }
     }
+
+    function cadastrar() {
+      fetch('/cadastrar', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          nome: document.getElementById('username').value,
+          idade: document.getElementById('birthdate').value,
+          email: document.getElementById('email').value,
+          senha: document.getElementById('senha').value
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+    }
+
   </script>
   <script src="js/script.js"></script>
 </body>
