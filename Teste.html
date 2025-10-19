@@ -93,12 +93,10 @@
     <canvas id="particles"></canvas>
     <div class="hero-content fade-in">
       <h2 id="typing-text"></h2>
-      <p><input type="text" id="username" placeholder="Nome de usuário" required></p>
-      <p><input type="date" id="birthdate" placeholder="Data de Nascimento" required></p>
       <p><input type="text" id="email" maxlength="100" placeholder="E-Mail" required></p>
       <p><input type="password" id="senha" maxlength="30" placeholder="Digite sua senha" >
       <span class="eye-icon" onclick="toggleSenha()">👁️</span></p>
-      <a href="Teste.html" class="btn neon-btn">Login</a>
+      <a href="explorar.html" class="btn neon-btn">Login</a>
       <a href="#" class="btn neon-btn" onclick="cadastrar()">Cadastrar</a>
     </div>
   </section>
@@ -121,14 +119,12 @@
     }
 
     function cadastrar() {
-      fetch('/cadastrar', {
+      fetch('/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          nome: document.getElementById('username').value,
-          idade: document.getElementById('birthdate').value,
           email: document.getElementById('email').value,
           senha: document.getElementById('senha').value
         })

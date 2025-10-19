@@ -8,6 +8,10 @@ class usuarioController {
     Cadastrar(novoCadastro){
         return usuarioModel.Cadastrar(novoCadastro);
     }
+
+    Login(dadosLogin){
+        return usuarioModel.Login(dadosLogin);
+    }
 }
 
 module.exports = new usuarioController();
