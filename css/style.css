@@ -1,0 +1,191 @@
+/* === RESET === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* === BASE === */
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: white;
+  overflow: hidden;
+}
+
+/* === FUNDO GRADIENTE + DESFOCADO === */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(120deg, #001a0f, #003322, #000000);
+  background-size: 200% 200%;
+  animation: bgMove 15s ease infinite;
+  filter: blur(10px) brightness(0.5);
+  transform: scale(1.05);
+  z-index: -3;
+}
+@keyframes bgMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* CAMADA ESCURA */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: -2;
+}
+
+/* CANVAS DE PARTÍCULAS */
+#particles {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+}
+
+/* === NAVBAR === */
+.navbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(6px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+.logo {
+  color: #00ff88;
+  font-weight: bold;
+  font-size: 1.6rem;
+  animation: neonPulse 2s infinite alternate;
+}
+@keyframes neonPulse {
+  0%,100% { text-shadow: 0 0 10px #00ff88, 0 0 20px #00ff88; }
+  50% { text-shadow: 0 0 25px #00ffaa, 0 0 45px #00ffaa; }
+}
+.menu {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+.menu a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+.menu a:hover { color: #00ff88; }
+
+/* === HERO === */
+.hero {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  position: relative;
+}
+.hero-content {
+  max-width: 700px;
+  background: rgba(0,0,0,0.5);
+  padding: 40px;
+  border-radius: 15px;
+  backdrop-filter: blur(8px);
+  animation: fadeUp 1s ease forwards;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* === TEXTO PRINCIPAL (DIGITAÇÃO) === */
+#typing-text {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #00ff88;
+  text-shadow: 0 0 15px #00ff88, 0 0 30px #00ff88;
+  border-right: 2px solid #00ff88;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* PARÁGRAFO */
+.hero p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  opacity: 0;
+  animation: fadeInUp 1.5s ease forwards;
+  animation-delay: 2s;
+}
+@keyframes fadeInUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+/* === BOTÃO NEON === */
+.neon-btn {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 12px 30px;
+  background: #00ff88;
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+  transition: 0.4s;
+  box-shadow: 0 0 15px #00ff88, 0 0 40px #00ff88 inset;
+  animation: pulseGlow 2.5s infinite;
+}
+@keyframes pulseGlow {
+  0%,100% { box-shadow: 0 0 15px #00ff88, 0 0 40px #00ff88 inset; }
+  50% { box-shadow: 0 0 25px #00ffaa, 0 0 70px #00ffaa inset; }
+}
+.neon-btn::before {
+  content: "";
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: 0.5s;
+}
+.neon-btn:hover::before { left: 100%; }
+.neon-btn:hover { transform: scale(1.05); }
+
+/* === FOOTER === */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(5px);
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+/* === SCROLL SUAVE === */
+html { scroll-behavior: smooth; }
+
+/* Partículas interativas */
+#tsparticles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -3;
+  pointer-events: none;
+}
+

@@ -1,0 +1,78 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  justify-content: center;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.jogo {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  padding: 10px;
+  transition: transform 0.3s ease;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.jogo:hover {
+  transform: scale(1.05);
+}
+
+.jogo img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.jogo h2 {
+  font-size: 18px;
+  margin: 10px 0 5px 0;
+  color: #00ff88;
+}
+
+.jogo p {
+  font-size: 14px;
+  color: #ccc;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 8px;
+  background-color: #00ff88;
+  color: black;
+  padding: 8px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #00cc6a;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: url('../img/imagem1.webp') no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  filter: blur(10px) brightness(0.6);
+  z-index: -1;
+}
+
+
