@@ -17,16 +17,27 @@ router.get('/listar', (req, res) => {
 
 router.post('/cadastrar', (req, res) => {
     const novoCadastro = req.body
+    if (!novoCadastro || !novoCadastro.nome || !novoCadastro.email || !novoCadastro.senha) {
+        return res.status(400).json({ message: 'Campos obrigatórios: nome, email, senha' });
+    }
     const cadastrar = usuarioController.Cadastrar(novoCadastro);
     cadastrar.then(resposta => res.status(201).json(resposta))
     .catch(error => res.status(400).json(error.message));
 });
 
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
     const dadosLogin = req.body
-    const login = usuarioController.Login(dadosLogin);
-    login.then(resposta => res.status(200).json(resposta))
-    .catch(error => res.status(400).json(error.message));
+    try {
+        const usuario = await usuarioController.Login(dadosLogin);
+        req.session.user = {
+            id: usuario.id || usuario.ID || null,
+            nome: usuario.nome || usuario.Nome || null,
+            email: usuario.email || usuario.Email || null
+        };
+        res.status(200).json({ message: "Login realizado com sucesso" });
+    } catch (error) {
+        res.status(401).json({ message: error.message });
+    }
 });
 
 module.exports = router;

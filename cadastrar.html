@@ -107,42 +107,6 @@
     <p>© 2025 Game Plus — Todos os direitos reservados.</p>
   </footer>
 
-  <script>
-    function toggleSenha() {
-      const input = document.getElementById('senha');
-      const icon = document.querySelector('.eye-icon');
-      if (input.type === "password") {
-        input.type = "text";
-        icon.textContent = "🙈"; // ícone de "olho fechado"
-      } else {
-        input.type = "password";
-        icon.textContent = "👁️"; // ícone de "olho aberto"
-      }
-    }
-
-    function cadastrar() {
-      fetch('/cadastrar', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          nome: document.getElementById('username').value,
-          idade: document.getElementById('birthdate').value,
-          email: document.getElementById('email').value,
-          senha: document.getElementById('senha').value
-        })
-      })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Success:', data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-    }
-
-  </script>
-  <script src="js/script.js"></script>
+  <script src="js/script_node.js"></script>
 </body>
 </html>

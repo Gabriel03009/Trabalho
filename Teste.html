@@ -97,7 +97,7 @@
       <p><input type="password" id="senha" maxlength="30" placeholder="Digite sua senha" >
       <span class="eye-icon" onclick="toggleSenha()">👁️</span></p>
       <a href="explorar.html" class="btn neon-btn">Login</a>
-      <a href="#" class="btn neon-btn" onclick="cadastrar()">Cadastrar</a>
+      <a href="#" class="btn neon-btn" onclick="fazerLogin()">Cadastrar</a>
     </div>
   </section>
 
@@ -106,39 +106,9 @@
   </footer>
 
   <script>
-    function toggleSenha() {
-      const input = document.getElementById('senha');
-      const icon = document.querySelector('.eye-icon');
-      if (input.type === "password") {
-        input.type = "text";
-        icon.textContent = "🙈"; // ícone de "olho fechado"
-      } else {
-        input.type = "password";
-        icon.textContent = "👁️"; // ícone de "olho aberto"
-      }
-    }
-
-    function cadastrar() {
-      fetch('/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          email: document.getElementById('email').value,
-          senha: document.getElementById('senha').value
-        })
-      })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Success:', data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-    }
+    
 
   </script>
-  <script src="js/script.js"></script>
+  <script src="js/script_node.js"></script>
 </body>
 </html>
