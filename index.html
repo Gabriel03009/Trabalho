@@ -100,7 +100,7 @@
       <span class="eye-icon" onclick="toggleSenha()">
         <img id="icone-olho" src="olho.png" alt="Mostrar senha" width="24">
       </span></p>
-      <a href="explorar.html" class="btn neon-btn">Login</a>
+      <a class="btn neon-btn" onclick="fazerLogin()">Login</a>
       <a href="cadastrar.html" class="btn neon-btn">Cadastrar</a>
     </div>
   </section>
@@ -109,23 +109,8 @@
     <p>© 2025 Game Plus — Todos os direitos reservados.</p>
   </footer>
 
- <script>
-  function toggleSenha() {
-    const input = document.getElementById('senha');
-    const icone = document.getElementById('icone-olho');
+  <script src="js/script_node.js"></script>
+  <script src="js/script_html.js"></script>
 
-    if (input.type === "password") {
-      input.type = "text";
-      icone.src = "olhos-fechados.png";
-      icone.alt = "Ocultar senha";
-    } else {
-      input.type = "password";
-      icone.src = "olho.png";
-      icone.alt = "Mostrar senha";
-    }
-  }
-</script>
-
-  <script src="js/script.js"></script>
 </body>
 </html>

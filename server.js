@@ -24,7 +24,7 @@ app.use(session({
 
 // Rota para servir o arquivo HTML
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'cadastrar.html'));
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.use(rotas);   
