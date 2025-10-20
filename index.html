@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Game Plus</title>
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    
+    button {
+        padding: 12px 0;
+        border: none;
+        border-radius: 8px;
+        background: linear-gradient(90deg, #00ff00, #006400);
+        color: #fff;
+        cursor: pointer;
+        width: 95%;
+        font-size: 16px;
+        margin-top: 12px;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 10px #00ff00;
+      }
+
+      input, select {
+        width: 90%;
+        padding: 12px;
+        margin: 12px 0;
+        border-radius: 8px;
+        border: none;
+        font-size: 16px;
+        outline: none;
+        background: #111;
+        color: #fff;
+      }
+
+      .hero {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin: 20px;
+            position: relative;
+      }
+
+        .hero-content {
+            max-width: 700px;
+            background: rgba(0,0,0,0.5);
+            padding: 40px;
+            border-radius: 15px;
+            backdrop-filter: blur(8px);
+            animation: fadeUp 1s ease forwards;
+          }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .input-container {
+          position: relative;
+          width: 300px;
+        }
+
+        input[type="password"], input[type="text"] {
+          width: 100%;
+          padding-right: 40px; /* espaço para o ícone */
+          padding: 10px;
+        }
+
+        .eye-icon {
+          position: absolute;
+          top: 50%;
+          right: 10px;
+          transform: translateY(-50%);
+          cursor: pointer;
+          font-size: 18px;
+        }
+
+    </style>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar">
+      <h1 class="logo">🎮 Game Plus</h1>
+    </nav>
+  </header>
+
+  <section id="inicio" class="hero">
+    <canvas id="particles"></canvas>
+    <div class="hero-content fade-in">
+      <h2 id="typing-text"></h2>
+      <p>Descubra, avalie e compartilhe suas experiências com os jogos mais incríveis do catálogo.</p>
+      <h2 id="typing-text"></h2>
+      <br>
+      <p><input type="text" id="email" maxlength="100" placeholder="E-Mail"></p>
+      <p><input type="password" id="senha" maxlength="30" placeholder="Digite sua senha" >
+      <span class="eye-icon" onclick="toggleSenha()">
+        <img id="icone-olho" src="olho.png" alt="Mostrar senha" width="24">
+      </span></p>
+      <a href="explorar.html" class="btn neon-btn">Login</a>
+      <a href="cadastrar.html" class="btn neon-btn">Cadastrar</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Game Plus — Todos os direitos reservados.</p>
+  </footer>
+
+ <script>
+  function toggleSenha() {
+    const input = document.getElementById('senha');
+    const icone = document.getElementById('icone-olho');
+
+    if (input.type === "password") {
+      input.type = "text";
+      icone.src = "olhos-fechados.png";
+      icone.alt = "Ocultar senha";
+    } else {
+      input.type = "password";
+      icone.src = "olho.png";
+      icone.alt = "Mostrar senha";
+    }
+  }
+</script>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

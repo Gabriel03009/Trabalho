@@ -83,9 +83,6 @@
   <header>
     <nav class="navbar">
       <h1 class="logo">🎮 Game Plus</h1>
-      <ul class="menu">
-        <li><a href="explorar.html">Explorar</a></li>
-      </ul>
     </nav>
   </header>
 
@@ -93,13 +90,13 @@
     <canvas id="particles"></canvas>
     <div class="hero-content fade-in">
       <h2 id="typing-text"></h2>
-      <p><input type="text" id="username" placeholder="Nome de usuário" required></p>
-      <p><input type="date" id="birthdate" placeholder="Data de Nascimento" required></p>
-      <p><input type="text" id="email" maxlength="100" placeholder="E-Mail" required></p>
+      <p><input type="text" id="username" placeholder="Nome de usuário"></p>
+      <p><input type="text"  id="Birthdate" placeholder="Data" onfocus="this.type='date'" onblur="if (!this.value) this.type='text';"></p>
+      <p><input type="text" id="email" maxlength="100" placeholder="E-Mail"></p>
       <p><input type="password" id="senha" maxlength="30" placeholder="Digite sua senha" >
       <span class="eye-icon" onclick="toggleSenha()">👁️</span></p>
-      <a href="Teste.html" class="btn neon-btn">Login</a>
-      <a href="#" class="btn neon-btn" onclick="cadastrar()">Cadastrar</a>
+      <a href="index.html" class="btn neon-btn">Início</a>
+      <a href="index.html" class="btn neon-btn">Cadastrar</a>
     </div>
   </section>
 
@@ -108,5 +105,6 @@
   </footer>
 
   <script src="js/script_node.js"></script>
+  <script src="js/script_html.js"></script>
 </body>
 </html>
