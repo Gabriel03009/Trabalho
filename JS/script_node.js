@@ -62,14 +62,17 @@ function fazerLogin() {
 // Mostrar/ocultar senha
 function toggleSenha() {
     const input = document.getElementById('senha');
-    const icon = document.querySelector('.eye-icon');
+    const icone = document.getElementById('icone-olho');
+
     if (input.type === "password") {
-        input.type = "text";
-        icon.textContent = "🙈"; // ícone de "olho fechado"
+      input.type = "text";
+      icone.src = "olhos-fechados.png";
+      icone.alt = "Ocultar senha";
     } else {
-    input.type = "password";
-    icon.textContent = "👁️"; // ícone de "olho aberto"
-      }
+      input.type = "password";
+      icone.src = "olho.png";
+      icone.alt = "Mostrar senha";
+    }
 }
 
 window.cadastrar = cadastrar;
