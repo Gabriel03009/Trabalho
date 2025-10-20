@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compra do Jogo</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: url('https://www.notebookcheck.info/fileadmin/Notebooks/News/_nc3/Ubisoft_coming_to_Xbox_Game_Pass.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #fff;
+  }
+
+  .container {
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(0,255,0,0.5);
+    width: 360px;
+    text-align: center;
+    animation: fadeIn 1s ease;
+  }
+
+  @keyframes fadeIn {
+    from {opacity: 0; transform: translateY(-20px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+
+  h2 {
+    margin-bottom: 25px;
+    font-size: 24px;
+    color: #00ff00;
+    text-shadow: 0 0 10px #00ff00;
+  }
+
+  input, select {
+    width: 90%;
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+    outline: none;
+    background: #111;
+    color: #fff;
+  }
+
+  button {
+    padding: 12px 0;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #00ff00, #006400);
+    color: #fff;
+    cursor: pointer;
+    width: 95%;
+    font-size: 16px;
+    margin-top: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px #00ff00;
+  }
+
+  button:hover {
+    background: linear-gradient(90deg, #006400, #00ff00);
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #00ff00;
+  }
+
+  .back-btn {
+    background: linear-gradient(90deg, #004d00, #00ff00);
+    margin-top: 10px;
+  }
+
+  .back-btn:hover {
+    background: linear-gradient(90deg, #00ff00, #004d00);
+  }
+
+  .success {
+    background: rgba(0,255,0,0.1);
+    color: #00ff00;
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 15px;
+    text-align: center;
+    display: none;
+    font-weight: bold;
+    text-shadow: 0 0 5px #00ff00;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Finalize sua Compra</h2>
+
+  <input type="text" id="username" placeholder="Nome de usuário" required>
+  <input type="password" id="password" placeholder="Senha" required>
+
+  <h3>Escolha a forma de pagamento:</h3>
+  <select id="payment">
+    <option value="">Selecione</option>
+    <option value="Cartão">Cartão</option>
+    <option value="PIX">PIX</option>
+    <option value="Boleto">Boleto</option>
+  </select>
+
+  <button onclick="finalizarCompra()">Finalizar Compra</button>
+  <button class="back-btn" onclick="voltarInicio()">Voltar ao Início</button>
+
+  <div id="msg" class="success"></div>
+</div>
+
+<script>
+function finalizarCompra() {
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value.trim();
+  const payment = document.getElementById('payment').value;
+
+  if (!username || !password || !payment) {
+    alert("Preencha todos os campos!");
+    return;
+  }
+
+  localStorage.setItem('user', JSON.stringify({ username, password, payment }));
+
+  const msg = document.getElementById('msg');
+  msg.style.display = 'block';
+  msg.innerHTML = `Parabéns ${username}! Sua compra via ${payment} foi realizada com sucesso! 🎮`;
+
+  document.getElementById('username').value = '';
+  document.getElementById('password').value = '';
+  document.getElementById('payment').value = '';
+}
+
+function voltarInicio() {
+  window.location.href = 'index.html';
+}
+</script>
+
+</body>
+</html>
