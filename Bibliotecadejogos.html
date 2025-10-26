@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biblioteca de Jogos</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #000000 0%, #003300 50%, #000000 100%);
+    background-size: 200% 200%;
+    animation: fundoAnimado 10s ease infinite;
+    position: relative;
+    overflow: hidden;
+  }
+
+  @keyframes fundoAnimado {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Efeito de partículas no fundo */
+  .particle {
+    position: absolute;
+    background: rgba(0, 255, 0, 0.3);
+    border-radius: 50%;
+    animation: flutuar 10s linear infinite;
+  }
+
+  @keyframes flutuar {
+    from { transform: translateY(100vh) scale(0); opacity: 0; }
+    50% { opacity: 1; }
+    to { transform: translateY(-10vh) scale(1); opacity: 0; }
+  }
+
+  .jogo {
+    background: rgba(0, 255, 0, 0.1);
+    margin: 10px;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    width: 220px;
+    box-shadow: 0 0 10px #00ff00;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .jogo:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px #00ff00;
+  }
+
+  .jogo img {
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  .jogo h2 {
+    font-size: 18px;
+    margin: 10px 0 5px 0;
+    color: #00ff00;
+  }
+
+  .jogo p {
+    font-size: 14px;
+    margin: 5px 0;
+  }
+
+  .back-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #00ff00, #006400);
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 0 10px #00ff00;
+    transition: all 0.3s ease;
+  }
+
+  .back-btn:hover {
+    background: linear-gradient(90deg, #006400, #00ff00);
+    transform: scale(1.1);
+  }
+
+  .remove-btn {
+    margin-top: 8px;
+    padding: 6px 10px;
+    background: #ff0000;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.3s;
+  }
+
+  .remove-btn:hover {
+    background: #ff5555;
+    transform: scale(1.1);
+  }
+</style>
+</head>
+<body>
+
+<a href="compra.html" class="back-btn">Voltar para Compras</a>
+<div id="biblioteca"></div>
+
+<script>
+// Criar partículas no fundo
+for (let i = 0; i < 20; i++) {
+  const particle = document.createElement('div');
+  particle.classList.add('particle');
+  particle.style.width = `${Math.random() * 8 + 4}px`;
+  particle.style.height = particle.style.width;
+  particle.style.left = `${Math.random() * 100}%`;
+  particle.style.animationDuration = `${Math.random() * 10 + 5}s`;
+  document.body.appendChild(particle);
+}
+
+// Mapa de imagens dos jogos
+const jogosImagens = {
+  "Forza Horizon 5": "https://cdn.cloudflare.steamstatic.com/steam/apps/1551360/header.jpg",
+  "GTA V": "https://cdn.cloudflare.steamstatic.com/steam/apps/271590/header.jpg",
+  "Red Dead Redemption 2": "https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/header.jpg",
+  "EA Sports FC 26": "https://gaming-cdn.com/images/products/19691/orig/ea-sports-fc-26-pc-ea-app-cover.jpg",
+  "Elden Ring": "https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg",
+  "Helldivers 2": "https://cdn.cloudflare.steamstatic.com/steam/apps/553850/header.jpg",
+  "Call of Duty: Black ops III": "https://cdn.cloudflare.steamstatic.com/steam/apps/1938090/header.jpg",
+  "No Man's Sky": "https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/ncom/software/switch-2/70010000099217/019e07d170c0a828eb8e8c20636f4d1fe413ff0044b1a4d3777d1ea268dc4724",
+  "Baldur's Gate 3": "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/header.jpg",
+  "Battlefield 6": "https://cdn2.unrealengine.com/egs-battlefield6standardedition-battlefieldstudios-s1-2560x1440-d399470e4b9f.jpg?resize=1&w=480&h=270",
+  "God of War 4": "https://imgs.search.brave.com/maENJHN1EljK5K8yBlkuaiIAp1sm_B0kxqmpEvvHw5g/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJhY2Nlc3Mu/Y29tL2Z1bGwvMzM4/OTA0OC5qcGc",
+  "The Witcher 3: Wild Hunt": "https://cdn.cloudflare.steamstatic.com/steam/apps/292030/header.jpg",
+  "DOOM Eternal": "https://reloading.com.br/wp-content/uploads/2020/04/doometernal.jpg",
+  "Resident Evil 4 Remake": "https://i.ytimg.com/vi/6SKxK-mf81k/maxresdefault.jpg",
+  "Assassin's Creed Odyssey": "https://cdn.cloudflare.steamstatic.com/steam/apps/812140/header.jpg",
+  "Assassin's Creed Mirage": "https://cdn1.epicgames.com/offer/9bcf5a4dc1d54cb6ab1a42f3a70c5cf4/amwide_2560x1440-5fe11b7b8703d49072b7f66ec75e5083",
+  "Hogwarts Legacy": "https://cdn.cloudflare.steamstatic.com/steam/apps/990080/header.jpg",
+  "Cyberpunk 2077": "https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg",
+  "Palword": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1623730/c961ac047294838bfe382bf193ade5c64b19e573/capsule_616x353.jpg?t=1759163961",
+  "Hunt: Showdown": "https://cdn.cloudflare.steamstatic.com/steam/apps/594650/header.jpg"
+};
+
+// pegar usuario atual
+const usuarioAtual = localStorage.getItem('usuarioAtual');
+const bibliotecaDiv = document.getElementById('biblioteca');
+let comprasUsuarios = JSON.parse(localStorage.getItem('comprasUsuarios')) || {};
+let jogosDoUsuario = comprasUsuarios[usuarioAtual] || [];
+
+// função para renderizar
+function renderizarBiblioteca() {
+  bibliotecaDiv.innerHTML = '';
+  if (jogosDoUsuario.length === 0) {
+    bibliotecaDiv.innerHTML = `<p>Nenhum jogo comprado ainda!</p>`;
+    return;
+  }
+
+  jogosDoUsuario.forEach((compra, index) => {
+    const jogoDiv = document.createElement('div');
+    jogoDiv.classList.add('jogo');
+    jogoDiv.innerHTML = `
+      <img src="${jogosImagens[compra.game]}" alt="${compra.game}">
+      <h2>${compra.game}</h2>
+      <p>Comprado por: ${usuarioAtual}</p>
+      <p>Pagamento: ${compra.payment}</p>
+      <button class="remove-btn" onclick="removerJogo(${index})">Remover</button>
+    `;
+    bibliotecaDiv.appendChild(jogoDiv);
+  });
+}
+
+// função remover
+function removerJogo(index) {
+  jogosDoUsuario.splice(index, 1);
+  comprasUsuarios[usuarioAtual] = jogosDoUsuario;
+  localStorage.setItem('comprasUsuarios', JSON.stringify(comprasUsuarios));
+  renderizarBiblioteca();
+}
+
+// renderizar na primeira carga
+renderizarBiblioteca();
+</script>
+</body>
+</html>

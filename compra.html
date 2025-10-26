@@ -102,6 +102,31 @@
   <input type="text" id="username" placeholder="Nome de usuário" required>
   <input type="password" id="password" placeholder="Senha" required>
 
+  <h3>Escolha o jogo:</h3>
+  <select id="games">
+    <option value="">Selecione um jogo</option>
+    <option value="Forza Horizon 5">Forza Horizon 5</option>
+    <option value="GTA V">GTA V</option>
+    <option value="Red Dead Redemption 2">Red Dead Redemption 2</option>
+    <option value="EA Sports FC 26">EA Sports FC 26</option>
+    <option value="Elden Ring">Elden Ring</option>
+    <option value="Helldivers 2">Helldivers 2</option>
+    <option value="Call of Duty: Black ops III">Call of Duty: Black ops III</option>
+    <option value="No Man's Sky">No Man's Sky</option>
+    <option value="Baldur's Gate 3">Baldur's Gate 3</option>
+    <option value="Battlefield 6">Battlefield 6</option>
+    <option value="God of War 4">God of War 4</option>
+    <option value="The Witcher 3: Wild Hunt">The Witcher 3: Wild Hunt</option>
+    <option value="DOOM Eternal">DOOM Eternal</option>
+    <option value="Resident Evil 4 Remake">Resident Evil 4 Remake</option>
+    <option value="Assassin's Creed Odyssey">Assassin's Creed Odyssey</option>
+    <option value="Assassin's Creed Mirage">Assassin's Creed Mirage</option>
+    <option value="Hogwarts Legacy">Hogwarts Legacy</option>
+    <option value="Cyberpunk 2077">Cyberpunk 2077</option>
+    <option value="Palworld">Palworld</option>
+    <option value="Hunt: Showdown">Hunt: Showdown</option>
+  </select>
+
   <h3>Escolha a forma de pagamento:</h3>
   <select id="payment">
     <option value="">Selecione</option>
@@ -112,6 +137,7 @@
 
   <button onclick="finalizarCompra()">Finalizar Compra</button>
   <button class="back-btn" onclick="voltarInicio()">Voltar ao Início</button>
+  <button onclick="irBiblioteca()">Ir para a Biblioteca de Jogos</button>
 
   <div id="msg" class="success"></div>
 </div>
@@ -120,26 +146,48 @@
 function finalizarCompra() {
   const username = document.getElementById('username').value.trim();
   const password = document.getElementById('password').value.trim();
+  const game = document.getElementById('games').value;
   const payment = document.getElementById('payment').value;
 
-  if (!username || !password || !payment) {
+
+  if (!username || !password || !game || !payment) {
     alert("Preencha todos os campos!");
     return;
   }
 
-  localStorage.setItem('user', JSON.stringify({ username, password, payment }));
+  let comprasUsuarios = JSON.parse(localStorage.getItem('comprasUsuarios')) || {};
+  if (!comprasUsuarios[username]) {
+    comprasUsuarios[username] = [];
+  }
 
+  // Adicionar nova compra
+  comprasUsuarios[username].push({ game, payment });
+
+  // Salvar no localStorage
+  localStorage.setItem('comprasUsuarios', JSON.stringify(comprasUsuarios));
+
+  // Mensagem de sucesso
   const msg = document.getElementById('msg');
   msg.style.display = 'block';
-  msg.innerHTML = `Parabéns ${username}! Sua compra via ${payment} foi realizada com sucesso! 🎮`;
+  msg.innerHTML = `Parabéns ${username}! Você comprou <strong>${game}</strong> via ${payment}! 🎮`;
 
-  document.getElementById('username').value = '';
-  document.getElementById('password').value = '';
+  // Limpar selects
+  document.getElementById('games').value = '';
   document.getElementById('payment').value = '';
 }
 
 function voltarInicio() {
   window.location.href = 'index.html';
+}
+
+function irBiblioteca() {
+  const username = document.getElementById('username').value.trim();
+  if (!username) {
+    alert("Digite o nome de usuário para acessar a biblioteca!");
+    return;
+  }
+  localStorage.setItem('usuarioAtual', username);
+  window.location.href = 'BibliotecaDeJogos.html';
 }
 </script>
 
